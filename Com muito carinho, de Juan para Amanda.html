@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosso Site</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #ffdde1;
+        }
+        img {
+            width: 300px;
+            border-radius: 15px;
+            margin-top: 20px;
+        }
+        .contador {
+            font-size: 20px;
+            margin-top: 20px;
+        }
+        .coracoes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+.coracao {
+    position: absolute;
+    bottom: 0;
+    font-size: 24px;
+    color: red;
+    opacity: 0.7;
+    animation: subir 5s linear infinite;
+}
+
+@keyframes subir {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100vh) scale(0.5);
+        opacity: 0;
+    }
+}
+
+#playButton {
+    background-color: #ff4d6d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+#playButton:hover {
+    background-color: #ff1a4d;
+}
+
+    </style>
+</head>
+<body>
+    <h1>Para o Amor da Minha Vida ❤️</h1>
+    <img src="assets/picture2.jpg" alt="Nossa Foto">
+    <p class="contador">Estamos juntos há <span id="contador"></span></p>
+    <p>Cada dia ao seu lado é um novo capítulo da história mais bonita que já escrevemos juntos.</p>
+    <p>Que esse site para sempre esteja com você, minha princesa 🫶</p>
+    <p>Te amo por toda a eternidade!</p>
+    
+    <button id="playButton">▶️ Tocar Música</button>
+<audio id="musica" loop>
+    <source src="assets/song.mp3" type="audio/mpeg">
+    Seu navegador não suporta áudio.
+</audio>
+
+<div class="coracoes"></div>
+
+<script>
+    function criarCoracao() {
+        const coracao = document.createElement("div");
+        coracao.classList.add("coracao");
+        coracao.textContent = "❤️";
+        coracao.style.left = Math.random() * 100 + "vw"; 
+        coracao.style.animationDuration = Math.random() * 3 + 2 + "s"; 
+
+        document.querySelector(".coracoes").appendChild(coracao);
+        console.log("Coração criado!");
+
+        setTimeout(() => {
+            coracao.remove(); 
+        }, 5000);
+    }
+
+    setInterval(criarCoracao, 500); 
+</script>
+
+
+<script>
+    document.getElementById("playButton").addEventListener("click", function() {
+        let musica = document.getElementById("musica");
+        if (musica.paused) {
+            musica.play();
+            this.textContent = "⏸️ Pausar Música";
+        } else {
+            musica.pause();
+            this.textContent = "▶️ Tocar Música";
+        }
+    });
+</script>
+    
+    <script>
+        function calcularTempo() {
+            let dataInicio = new Date("2023-12-17");
+            let hoje = new Date();
+            let diferenca = hoje - dataInicio;
+            let dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
+            document.getElementById("contador").textContent = dias + " dias";
+        }
+        calcularTempo();
+    </script>
+</body>
+</html>
